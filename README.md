@@ -14,7 +14,7 @@ If `devtools` is not installed on your PC, install `devtools` with Internet conn
 Install from GitHub using `devtools`.
     
     library(devtools)
-    install_github("ToshihiroIguchi/qatsp")
+    install_github("ToshihiroIguchi/gaglm")
 
 Load the `qatsp` package and attach it.
 
