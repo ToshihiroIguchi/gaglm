@@ -16,9 +16,9 @@ Install from GitHub using `devtools`.
     library(devtools)
     install_github("ToshihiroIguchi/gaglm")
 
-Load the `qatsp` package and attach it.
+Load the `gaglm` package and attach it.
 
-    library(qatsp)
+    library(gaglm)
 
 Installation may fail if running under proxy environment.
 In that case, you may be able to install using the `httr` package.
