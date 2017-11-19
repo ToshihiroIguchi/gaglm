@@ -1,0 +1,11 @@
+Package: gaglm
+Type: Package
+Title: Automatic selection of explanatory variable of multiple regression analysis by genetic algorithm
+Version: 0.1.0
+Author: Toshihiro Iguchi
+Maintainer: Toshihiro Iguchi
+Description: It is generally difficult to select explanatory variables in multiple regression analysis. This package automatically selects explanatory variables of multiple regression analysis with genetic algorithm and it will be useful for creating your statistical model.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Depends: genalg
