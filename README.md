@@ -26,6 +26,7 @@ In that case, you may be able to install using the `httr` package.
 ### Examples
 We explain the usage of `gaglm` function specifically using `attitude`.
 Like the `glm` function, write an expression in `formula` form and specify data.frame for `data`.
+The objective variable is  `rating ` and the explanatory variable is all other items.
 
     result <- gaglm(rating ~ complaints+ privileges +learning +raises+ critical+ advance, data = attitude)
 
@@ -34,6 +35,9 @@ By using the plot function, it shows the selection of variables by genetic algor
     plot(result)
     
 ![plot](gaglm_plot.png)
+
+An optimal explanatory variable by genetic algorithm was found in a short time.
+There is no problem with the result of regression diagnosis.
     
 In addition, by using the summary function, we can confirm the result with the smallest information criterion.
     
