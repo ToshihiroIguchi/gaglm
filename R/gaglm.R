@@ -18,6 +18,20 @@ gaglm <- function(formula, family = "gaussian", data, offset =NULL, method = "AI
 
   #解析用データフレーム
   yname <- as.character(formula[2])
+
+  #説明変数に括弧等の特殊文字があるとエラーを起こすので置換。
+  #以下は特殊文字の置換の参考。
+  #https://stackoverflow.com/questions/9449466/remove-parenthesis-from-string
+  #もう少しスマートに書ける気がする。
+  yname <- gsub("(", ".", yname, fixed=TRUE)
+  yname <- gsub(")", ".", yname, fixed=TRUE)
+  yname <- gsub("^", ".", yname, fixed=TRUE)
+  yname <- gsub("+", ".", yname, fixed=TRUE)
+  yname <- gsub("-", ".", yname, fixed=TRUE)
+  yname <- gsub("*", ".", yname, fixed=TRUE)
+  yname <- gsub("/", ".", yname, fixed=TRUE)
+  yname <- gsub(":", ".", yname, fixed=TRUE)
+
   data2 <- data.frame(y, x)
   names(data2)[1] <- yname
   names(data2)[2] <- "Intercept"
@@ -39,7 +53,8 @@ gaglm <- function(formula, family = "gaussian", data, offset =NULL, method = "AI
     #説明変数がない場合、エラーとして扱う。
     if(max(x) == 0){return(result.intercept)}
 
-    ev_use <- c(TRUE, as.logical(x)) #目的変数は必ず入れるので最初はTRUE
+    #目的変数は必ず入れるので最初はTRUE
+    ev_use <- c(TRUE, as.logical(x))
 
     result <- glm(formula = formula2, family = family, offset = offset, data = data2[,ev_use])
 
@@ -60,7 +75,6 @@ gaglm <- function(formula, family = "gaussian", data, offset =NULL, method = "AI
          stop("Please specify method correctly."))
 
   #遺伝的アルゴリズムで最適化
-
   if(is.null(mutationChance)){mutationChance <- 1/(ev_num + 1)}
   result_ga <- rbga.bin(size = ev_num, evalFunc = glm_res_ic,
                         mutationChance = mutationChance,
@@ -99,5 +113,8 @@ plot.gaglm <- function(result){
   par(mfrow=c(1,1))
 }
 
-
+#係数を返す
+coef.gaglm <- function(result){
+  coef(result$bestmodel)
+}
 
