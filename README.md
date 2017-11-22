@@ -33,7 +33,7 @@ By using the plot function, it shows the selection of variables by genetic algor
 
     plot(result)
     
-![aaa](gaglm_plot.png)
+![plot](gaglm_plot.png)
     
 In addition, by using the summary function, we can confirm the result with the smallest information criterion.
     
@@ -44,10 +44,16 @@ If variable selection does not work, it may be solved by changing the value of `
 
 ### References
 Dobson, A. J. (1990) An Introduction to Generalized Linear Models. London: Chapman and Hall.
+
 Hastie, T. J. and Pregibon, D. (1992) Generalized linear models. Chapter 6 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
+
 McCullagh P. and Nelder, J. A. (1989) Generalized Linear Models. London: Chapman and Hall.
+
 Venables, W. N. and Ripley, B. D. (2002) Modern Applied Statistics with S. New York: Springer.
+
 C.B. Lucasius and G. Kateman (1993). Understanding and using genetic algorithms - Part 1. Concepts, properties and context. Chemometrics and Intelligent Laboratory Systems 19:1-33.
+
 C.B. Lucasius and G. Kateman (1994). Understanding and using genetic algorithms - Part 2. Representation, configuration and hybridization. Chemometrics and Intelligent Laboratory Systems 25:99-145.
+
 Chatterjee, S. and Price, B. (1977) Regression Analysis by Example. New York: Wiley. (Section 3.7, p.68ff of 2nd ed.(1991).)
 
