@@ -28,7 +28,7 @@ We explain the usage of `gaglm` function specifically using `attitude`.
 Like the `glm` function, write an expression in `formula` form and specify data.frame for `data`.
 The objective variable is  `rating ` and the explanatory variable is all other items.
 
-    result <- gaglm(rating ~ complaints+ privileges +learning +raises+ critical+ advance, data = attitude)
+    result <- gaglm(rating ~ complaints + privileges + learning + raises + critical + advance, data = attitude)
 
 By using the plot function, it shows the selection of variables by genetic algorithm, the transition of information quantity criteria, and the result of regression diagnosis.
 
