@@ -22,15 +22,11 @@ gaglm <- function(formula, family = "gaussian", data, offset =NULL, method = "AI
   #説明変数に括弧等の特殊文字があるとエラーを起こすので置換。
   #以下は特殊文字の置換の参考。
   #https://stackoverflow.com/questions/9449466/remove-parenthesis-from-string
-  #もう少しスマートに書ける気がする。
-  yname <- gsub("(", ".", yname, fixed=TRUE)
-  yname <- gsub(")", ".", yname, fixed=TRUE)
-  yname <- gsub("^", ".", yname, fixed=TRUE)
-  yname <- gsub("+", ".", yname, fixed=TRUE)
-  yname <- gsub("-", ".", yname, fixed=TRUE)
-  yname <- gsub("*", ".", yname, fixed=TRUE)
-  yname <- gsub("/", ".", yname, fixed=TRUE)
-  yname <- gsub(":", ".", yname, fixed=TRUE)
+  sc <- c("(", ")", "^", "+", "-", "*", "/", ":")
+  for(i in 1:length(sc)){
+    yname <- gsub(sc[i], ".", yname, fixed = TRUE)
+  }
+
 
   data2 <- data.frame(y, x)
   names(data2)[1] <- yname
