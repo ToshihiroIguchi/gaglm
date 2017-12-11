@@ -3,11 +3,21 @@
 
 #遺伝的アルゴリズムでglmを最適化。
 gaglm <- function(formula, family = "gaussian", data, offset =NULL, method = "AIC",
-                  cook = 0.5,
+                  cook = 0.5, nfolds = 5,
                   popSize = 100, iters = 100,
                   mutationChance= NULL , zeroToOneRatio=10){
 
   #methodはAIC,BICとしたい。
+
+  #method = "CV" つまりcross varidationが指定された場合。
+  if(method == "CV"){
+    ret <- gaglm.cv(formula = formula, family = family, data = data, offset = offset,
+                    nfolds = nfolds, cook = cook, popSize = popSize, iters = iters,
+                    mutationChance = mutationChance, zeroToOneRatio = zeroToOneRatio)
+    return(ret)
+    stop("error")
+  }
+
 
   #説明変数を指定。カテゴリカル変数はダミー変数に変換される。
   x <- model.matrix(formula,data=data)

@@ -8,10 +8,17 @@ gaglm.cv <- function(formula, family = "gaussian", data, offset =NULL,
                      popSize = 100, iters = 100,
                      mutationChance= NULL , zeroToOneRatio=10){
 
-  #family = "gaussian", "poisson"
-  if(family != "gaussian" && family != "poisson"){
-    stop("For family variable only gaussian or poisson can be specified.")
+  ##family = "gaussian", "poisson"
+  #if(family != "gaussian" && family != "poisson"){
+  #  stop("For family variable only gaussian or poisson can be specified.")
+  #}
+
+  #現段階では正規分布のみ
+  #family = "gaussian"
+  if(family != "gaussian"){
+    stop("For family variable only gaussian can be specified.")
   }
+
 
   #説明変数を指定。カテゴリカル変数はダミー変数に変換される。
   x <- model.matrix(formula,data=data)
@@ -143,14 +150,17 @@ summary.gaglm.cv <- function(result){
 
 #結果のプロット
 plot.gaglm.cv <- function(result){
-  par(mfrow=c(2,2))
+  par(mfrow=c(2,3))
 
   #遺伝的アルゴリズムの推移
   plot(result$ga$best, type = "l",
-       xlab = "generation", ylab = "RMSE")
+       xlab = "Generation", ylab = "RMSE")
+
+  #Cross Varidationの結果
+  plot(result$bestmodel$cv, xlab = "Measure", ylab = "Predict")
 
   #回帰診断
-  plot(result$bestmodel$result, which = c(1,2,4))
+  plot(result$bestmodel$result, which = c(1,2,3,4))
   par(mfrow=c(1,1))
 }
 
