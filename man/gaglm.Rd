@@ -2,7 +2,7 @@
 \alias{gaglm}
 \title{Automatic selection of explanatory variable of multiple regression analysis by genetic algorithm}
 \usage{
-gaglm(formula, family = "gaussian", data, offset =NULL, method = "AIC", cook = 0.5,
+gaglm(formula, family = "gaussian", data, offset =NULL, method = "AIC", cook = 0.5, nfolds = 5,
 popSize = 100, iters = 100, mutationChance = NULL, zeroToOneRatio=10)
 }
 
@@ -20,10 +20,14 @@ an optional data frame, list or environment (or object coercible by as.data.fram
 this can be used to specify an a priori known component to be included in the linear predictor during fitting. This should be NULL or a numeric vector of length equal to the number of cases. One or more offset terms can be included in the formula instead or as well, and if more than one is specified their sum is used.
 }
 \item{method}{
-method is optimization target. You can select AIC or BIC.
+method is optimization target. You can select AIC or BIC or CV.
 }
 \item{cook}{
 It is the upper limit of cook distance. If the model exceeds the upper limit value, it returns the value of the model with only the intercept.
+}
+\item{nfolds}{
+number of divisions of cross validation.
+Valid only when method = "CV".
 }
 \item{popSize}{
 the population size.

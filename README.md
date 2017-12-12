@@ -27,6 +27,7 @@ In that case, you may be able to install using the `httr` package.
 We explain the usage of `gaglm` function specifically using `attitude`.
 Like the `glm` function, write an expression in `formula` form and specify data.frame for `data`.
 The objective variable is  `rating ` and the explanatory variable is all other items.
+If `method` is not specified, `method = "AIC"`.
 
     result <- gaglm(rating ~ complaints + privileges + learning + raises + critical + advance, data = attitude)
 
@@ -44,6 +45,20 @@ In addition, by using the summary function, we can confirm the result with the s
     summary(result)
 
 If variable selection does not work, it may be solved by changing the value of `zeroToOneRatio` of `gaglm` function.    
+
+
+If `method = "CV"`, search for a model that minimizes RMSE of cross validation.
+However, only `family = "gaussian"` can be selected.
+
+    result <- gaglm(rating ~ complaints + privileges + learning + raises + critical + advance, data = attitude, method = "CV", popSize = 30)
+
+The result is displayed by the `plot` function.
+If `method = "CV"`, the result of cross varidation is also displayed.
+
+    plot(result)
+
+![plot2](gaglm.cv_plot.png)
+
 
 
 ### References
