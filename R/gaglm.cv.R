@@ -80,8 +80,8 @@ gaglm.cv <- function(formula, family = "gaussian", data, offset =NULL,
     for(i in 1:nfolds){
       cv.res <- glm(formula = formula2, family = family, offset = offset,
                     data = data2[which(idvec != i), ev_use])
-      cv.pre0 <- data.frame(Mes = data2[which(idvec == i), 1],
-                            Pre = predict(cv.res, data2[which(idvec == i), ev_use]))
+      cv.pre0 <- data.frame(Pre = predict(cv.res, data2[which(idvec == i), ev_use]),
+                            Mes = data2[which(idvec == i), 1])
       cv.pre <- rbind(cv.pre, cv.pre0)
     }
 
@@ -153,18 +153,22 @@ plot.gaglm.cv <- function(result){
   par(mfrow=c(2,3))
 
   #遺伝的アルゴリズムの推移
-  plot(result$ga$best, type = "l",
-       xlab = "Generation", ylab = "RMSE")
+  plot(result$ga$best, type = "l", xlab = "Generation", ylab = "RMSE")
+  title(main = list("Generation vs RMSE",
+                    cex = 1.5, font = 1), outer = FALSE, line =0.5)
 
   #Cross Varidationの結果
-  plot(result$bestmodel$cv, xlab = "Measure", ylab = "Predict")
+  plot(result$bestmodel$cv, ylab = "Measure", xlab = "Predict")
   abline(a=0, b=1, lty = 3)
+  title(main = list("Cross varidation",
+                    cex = 1.5, font = 1), outer = FALSE, line =0.5)
 
   #回帰診断
   plot(result$bestmodel$result, which = c(1,2,3,4))
   par(mfrow=c(1,1))
 }
 
+plot(test2)
 
 
 #係数を返す
