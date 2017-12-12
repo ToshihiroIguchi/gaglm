@@ -158,6 +158,7 @@ plot.gaglm.cv <- function(result){
 
   #Cross Varidationの結果
   plot(result$bestmodel$cv, xlab = "Measure", ylab = "Predict")
+  abline(a=0, b=1, lty = 3)
 
   #回帰診断
   plot(result$bestmodel$result, which = c(1,2,3,4))
