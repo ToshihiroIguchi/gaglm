@@ -168,7 +168,6 @@ plot.gaglm.cv <- function(result){
   par(mfrow=c(1,1))
 }
 
-plot(test2)
 
 
 #係数を返す
