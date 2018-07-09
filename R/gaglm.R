@@ -5,7 +5,11 @@
 gaglm <- function(formula, family = "gaussian", data, offset =NULL, method = "AIC",
                   cook = 0.5, nfolds = 5,
                   popSize = 100, iters = 100,
-                  mutationChance= NULL , zeroToOneRatio=10){
+                  mutationChance= NULL , zeroToOneRatio=10,
+                  seed = NULL){
+
+  #乱数種の設定
+  if(!is.null(seed)){set.seed(seed)}
 
   #methodはAIC,BICとしたい。
 
@@ -123,4 +127,3 @@ plot.gaglm <- function(result){
 coef.gaglm <- function(result){
   coef(result$bestmodel)
 }
-

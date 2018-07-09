@@ -141,12 +141,10 @@ gaglm.cv <- function(formula, family = "gaussian", data, offset =NULL,
 }
 
 
-
 #結果を返す
 summary.gaglm.cv <- function(result){
   summary(result$bestmodel$result)
 }
-
 
 #結果のプロット
 plot.gaglm.cv <- function(result){
@@ -158,8 +156,13 @@ plot.gaglm.cv <- function(result){
                     cex = 1.5, font = 1), outer = FALSE, line =0.5)
 
   #Cross Varidationの結果
+  r2.res <- paste0("R2 = ", round((cor.test(result$bestmodel$cv[, 1],
+                                      result$bestmodel$cv[, 2])$estimate)^2,
+                   digits = 3))
+
   plot(result$bestmodel$cv, ylab = "Measure", xlab = "Predict")
   abline(a=0, b=1, lty = 3)
+  legend("topleft", legend = r2.res, bty="n")
   title(main = list("Cross varidation",
                     cex = 1.5, font = 1), outer = FALSE, line =0.5)
 
@@ -167,8 +170,6 @@ plot.gaglm.cv <- function(result){
   plot(result$bestmodel$result, which = c(1,2,3,4))
   par(mfrow=c(1,1))
 }
-
-
 
 #係数を返す
 coef.gaglm.cv <- function(result){
