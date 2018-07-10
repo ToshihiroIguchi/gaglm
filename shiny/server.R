@@ -39,9 +39,11 @@ server <- function(input, output, session) {
 
     #Elastic Netの計算
     result <- reactive({gaglm(chr2formula(y = input$ydata, x= input$xdata),
-                               data = csv_file(),
+                              data = csv_file(),
                               method = "CV",
-                               seed = 108
+                              seed = 108,
+                              cook = input$cook, nfolds = input$nfolds,
+                              popSize = input$popsize, iters = input$popsize
                                )
       })
 
