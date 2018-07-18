@@ -37,14 +37,15 @@ server <- function(input, output, session) {
 
     csv_file <- reactive({read.csv(input$file$datapath)})
 
-    #Elastic Netの計算
+    #gaglmの計算
     result <- reactive({gaglm(chr2formula(y = input$ydata, x= input$xdata),
                               data = csv_file(),
                               method = "CV",
                               seed = 108,
-                              cook = input$cook, nfolds = input$nfolds,
-                              popSize = input$popsize, iters = input$popsize
-                               )
+                              cook = input$cook,
+                              nfolds = input$nfolds,
+                              popSize = input$popsize,
+                              iters = input$popsize)
       })
 
     #結果のプロット
